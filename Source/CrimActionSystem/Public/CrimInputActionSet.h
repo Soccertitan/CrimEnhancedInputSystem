@@ -7,7 +7,7 @@
 #include "Engine/DataAsset.h"
 #include "CrimInputActionSet.generated.h"
 
-class UCrimActionDefinition;
+class UCrimAction;
 class UInputMappingContext;
 class UInputAction;
 
@@ -24,7 +24,7 @@ struct FCrimInputAction
 	TObjectPtr<UInputAction> InputAction = nullptr;
 	// The Action to call when the InputAction is activated. Can be empty and set at runtime.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TObjectPtr<UCrimActionDefinition> ActionDefinition;
+	TSubclassOf<UCrimAction> ActionClass;
 	
 	bool IsValid() const;
 };

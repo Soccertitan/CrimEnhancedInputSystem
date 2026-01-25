@@ -9,7 +9,6 @@
 
 struct FInputActionValue;
 class UCrimActionManagerComponent;
-class UCrimActionDefinition;
 
 /**
  * An action that can be performed taking in input.
@@ -21,9 +20,7 @@ class CRIMACTIONSYSTEM_API UCrimAction : public UObject
 	
 public:
 	UCrimAction();
-	
-	UFUNCTION(BlueprintPure, Category = "CrimAction")
-	UCrimActionDefinition* GetActionDefinition() const { return ActionDefinition; }
+
 	UFUNCTION(BlueprintPure, Category = "CrimAction")
 	APlayerController* GetPlayerController() const { return PlayerController; }
 	UFUNCTION(BlueprintPure, Category = "CrimAction")
@@ -85,17 +82,13 @@ private:
 	UPROPERTY()
 	FGameplayTag InputTag;
 
-	/** Cached definition that this object was created from. */
-	UPROPERTY()
-	TObjectPtr<UCrimActionDefinition> ActionDefinition;
-	
 	/** Cached pointer to the PlayerController. */
 	UPROPERTY()
 	TObjectPtr<APlayerController> PlayerController;
-	
+
 	/** Cached pointer to the ActionManagerComponent. */
 	UPROPERTY()
 	TObjectPtr<UCrimActionManagerComponent> ActionManagerComponent;
-	
+
 	friend UCrimActionManagerComponent;
 };

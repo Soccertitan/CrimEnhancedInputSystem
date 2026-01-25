@@ -4,7 +4,6 @@
 #include "CrimActionManagerComponent.h"
 
 #include "CrimAction.h"
-#include "CrimActionDefinition.h"
 #include "CrimActionSystem.h"
 #include "CrimInputActionSet.h"
 #include "EnhancedInputComponent.h"
@@ -83,9 +82,9 @@ void UCrimActionManagerComponent::SetInputAction(const FCrimInputAction& InputAc
 	{
 		Internal_RemoveBinding(*ActionItem);
 		ActionItem->InputAction = InputAction.InputAction;
-		if (InputAction.ActionDefinition && InputAction.ActionDefinition->ActionClass)
+		if (InputAction.ActionClass)
 		{
-			Internal_AddBinding(*ActionItem, InputAction.ActionDefinition);
+			Internal_AddBinding(*ActionItem, InputAction.ActionClass);
 		}
 	}
 	else
@@ -93,14 +92,14 @@ void UCrimActionManagerComponent::SetInputAction(const FCrimInputAction& InputAc
 		FCrimInputActionItem& NewActionItem = InputActionItems.AddDefaulted_GetRef();
 		NewActionItem.InputTag = InputAction.InputTag;
 		NewActionItem.InputAction = InputAction.InputAction;
-		if (InputAction.ActionDefinition && InputAction.ActionDefinition->ActionClass)
+		if (InputAction.ActionClass)
 		{
-			Internal_AddBinding(NewActionItem, InputAction.ActionDefinition);
+			Internal_AddBinding(NewActionItem, InputAction.ActionClass);
 		}
 	}
 }
 
-void UCrimActionManagerComponent::SetAction(FGameplayTag InputTag, UCrimActionDefinition* ActionDefinition)
+void UCrimActionManagerComponent::SetAction(FGameplayTag InputTag, TSubclassOf<UCrimAction> ActionClass)
 {
 	if (!InputTag.IsValid())
 	{
@@ -110,18 +109,17 @@ void UCrimActionManagerComponent::SetAction(FGameplayTag InputTag, UCrimActionDe
 	if (FCrimInputActionItem* ActionItem = InputActionItems.FindByKey(InputTag))
 	{
 		Internal_RemoveBinding(*ActionItem);
-		if (ActionDefinition && ActionDefinition->ActionClass)
+		if (ActionClass)
 		{
-			Internal_AddBinding(*ActionItem, ActionDefinition);
+			Internal_AddBinding(*ActionItem, ActionClass);
 		}
 	}
 }
 
-void UCrimActionManagerComponent::Internal_AddBinding(FCrimInputActionItem& InputActionItem, UCrimActionDefinition* ActionDefinition)
+void UCrimActionManagerComponent::Internal_AddBinding(FCrimInputActionItem& InputActionItem, TSubclassOf<UCrimAction> ActionClass)
 {
-	UCrimAction* NewAction = NewObject<UCrimAction>(this, ActionDefinition->ActionClass);
+	UCrimAction* NewAction = NewObject<UCrimAction>(this, ActionClass);
 	NewAction->InputTag = InputActionItem.InputTag;
-	NewAction->ActionDefinition = ActionDefinition;
 	NewAction->PlayerController = PlayerController;
 	NewAction->ActionManagerComponent = this;
 	NewAction->InitializeAction();

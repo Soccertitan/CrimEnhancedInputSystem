@@ -26,7 +26,8 @@ public class CrimActionSystem : ModuleRules
 				"Core", 
 				"GameplayTags",
 				"EnhancedInput",
-				"UMG",
+				"UMG", 
+				"ModelViewViewModel",
 			}
 			);
 			

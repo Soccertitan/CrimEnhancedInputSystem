@@ -9,7 +9,6 @@
 #include "CrimActionManagerComponent.generated.h"
 
 
-class UCrimActionDefinition;
 class UEnhancedInputLocalPlayerSubsystem;
 class UCrimInputActionSet;
 
@@ -47,10 +46,10 @@ public:
 	void SetInputAction(const FCrimInputAction& InputAction);
 	
 	UFUNCTION(BlueprintCallable, Category = "CrimActionManager")
-	void SetAction(UPARAM(meta = (Categories = "Input")) FGameplayTag InputTag, UCrimActionDefinition* ActionDefinition);
+	void SetAction(UPARAM(meta = (Categories = "Input")) FGameplayTag InputTag, TSubclassOf<UCrimAction> ActionClass);
 	
 protected:
-	// Input Actions to bind to by default.
+	// Input Actions to bind to by default during initializing.
 	UPROPERTY(EditAnywhere)
 	TArray<TObjectPtr<UCrimInputActionSet>> InputActionSets;
 	
@@ -70,6 +69,6 @@ private:
 	UPROPERTY()
 	TArray<FCrimInputActionItem> InputActionItems;
 	
-	void Internal_AddBinding(FCrimInputActionItem& InputActionItem, UCrimActionDefinition* ActionDefinition);
+	void Internal_AddBinding(FCrimInputActionItem& InputActionItem, TSubclassOf<UCrimAction> ActionClass);
 	void Internal_RemoveBinding(FCrimInputActionItem& InputActionItem);
 };
