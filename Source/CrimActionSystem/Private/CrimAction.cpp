@@ -43,9 +43,3 @@ void UCrimAction::InitializeAction()
 	OnInitializeAction();
 	K2_OnInitializeAction();
 }
-
-void UCrimAction::ResetAction()
-{
-	OnResetAction();
-	K2_OnResetAction();
-}

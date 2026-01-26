@@ -108,7 +108,10 @@ void UCrimActionManagerComponent::SetAction(FGameplayTag InputTag, TSubclassOf<U
 	
 	if (FCrimInputActionItem* ActionItem = InputActionItems.FindByKey(InputTag))
 	{
-		Internal_RemoveBinding(*ActionItem);
+		if (ActionItem->CrimAction)
+		{
+			Internal_RemoveBinding(*ActionItem);
+		}
 		if (ActionClass)
 		{
 			Internal_AddBinding(*ActionItem, ActionClass);
@@ -118,42 +121,50 @@ void UCrimActionManagerComponent::SetAction(FGameplayTag InputTag, TSubclassOf<U
 
 void UCrimActionManagerComponent::Internal_AddBinding(FCrimInputActionItem& InputActionItem, TSubclassOf<UCrimAction> ActionClass)
 {
-	UCrimAction* NewAction = NewObject<UCrimAction>(this, ActionClass);
-	NewAction->InputTag = InputActionItem.InputTag;
-	NewAction->PlayerController = PlayerController;
-	NewAction->ActionManagerComponent = this;
-	NewAction->InitializeAction();
+	bool bMakeNewAction = true;
+	for (const FCrimInputActionItem& Item : InputActionItems)
+	{
+		if (Item.CrimAction && Item.CrimAction->GetClass() == ActionClass)
+		{
+			InputActionItem.CrimAction = Item.CrimAction;
+			bMakeNewAction = false;
+		}
+	}
 	
-	InputActionItem.CrimAction = NewAction;
+	if (bMakeNewAction)
+	{
+		UCrimAction* NewAction = NewObject<UCrimAction>(this, ActionClass);
+		NewAction->InputTag = InputActionItem.InputTag;
+		NewAction->PlayerController = PlayerController;
+		NewAction->ActionManagerComponent = this;
+		NewAction->InitializeAction();
+		InputActionItem.CrimAction = NewAction;
+	}
 	
-	//TODO: Figure out how to tell if the overriden functions are implements to avoid having to bind for each action when it's unecessary.
-	InputActionItem.TriggeredHandle = EnhancedInputComponent->BindAction(InputActionItem.InputAction, ETriggerEvent::Triggered, NewAction, &UCrimAction::InputActionTriggered).GetHandle();
-	InputActionItem.StartedHandle = EnhancedInputComponent->BindAction(InputActionItem.InputAction, ETriggerEvent::Started, NewAction, &UCrimAction::InputActionStarted).GetHandle();
-	InputActionItem.OngoingHandle = EnhancedInputComponent->BindAction(InputActionItem.InputAction, ETriggerEvent::Ongoing, NewAction, &UCrimAction::InputActionOngoing).GetHandle();
-	InputActionItem.CanceledHandle = EnhancedInputComponent->BindAction(InputActionItem.InputAction, ETriggerEvent::Canceled, NewAction, &UCrimAction::InputActionCanceled).GetHandle();
-	InputActionItem.CompletedHandle = EnhancedInputComponent->BindAction(InputActionItem.InputAction, ETriggerEvent::Completed, NewAction, &UCrimAction::InputActionCompleted).GetHandle();
+	//TODO: Figure out how to tell if the overriden functions are implements to avoid having to bind for each action when it's not necessary.
+	InputActionItem.TriggeredHandle = EnhancedInputComponent->BindAction(InputActionItem.InputAction, ETriggerEvent::Triggered, InputActionItem.CrimAction.Get(), &UCrimAction::InputActionTriggered).GetHandle();
+	InputActionItem.StartedHandle = EnhancedInputComponent->BindAction(InputActionItem.InputAction, ETriggerEvent::Started, InputActionItem.CrimAction.Get(), &UCrimAction::InputActionStarted).GetHandle();
+	InputActionItem.OngoingHandle = EnhancedInputComponent->BindAction(InputActionItem.InputAction, ETriggerEvent::Ongoing, InputActionItem.CrimAction.Get(), &UCrimAction::InputActionOngoing).GetHandle();
+	InputActionItem.CanceledHandle = EnhancedInputComponent->BindAction(InputActionItem.InputAction, ETriggerEvent::Canceled, InputActionItem.CrimAction.Get(), &UCrimAction::InputActionCanceled).GetHandle();
+	InputActionItem.CompletedHandle = EnhancedInputComponent->BindAction(InputActionItem.InputAction, ETriggerEvent::Completed, InputActionItem.CrimAction.Get(), &UCrimAction::InputActionCompleted).GetHandle();
 	
-	OnInputActionAdded.Broadcast(InputActionItem);
+	OnActionAdded.Broadcast(InputActionItem);
 }
 
 void UCrimActionManagerComponent::Internal_RemoveBinding(FCrimInputActionItem& InputActionItem)
 {
-	if (InputActionItem.CrimAction)
-	{
-		EnhancedInputComponent->RemoveBindingByHandle(InputActionItem.StartedHandle);
-		InputActionItem.StartedHandle = INDEX_NONE;
-		EnhancedInputComponent->RemoveBindingByHandle(InputActionItem.TriggeredHandle);
-		InputActionItem.TriggeredHandle = INDEX_NONE;
-		EnhancedInputComponent->RemoveBindingByHandle(InputActionItem.OngoingHandle);
-		InputActionItem.OngoingHandle = INDEX_NONE;
-		EnhancedInputComponent->RemoveBindingByHandle(InputActionItem.CanceledHandle);
-		InputActionItem.CanceledHandle = INDEX_NONE;
-		EnhancedInputComponent->RemoveBindingByHandle(InputActionItem.CompletedHandle);
-		InputActionItem.CompletedHandle = INDEX_NONE;
-		
-		InputActionItem.CrimAction->ResetAction();
-		OnInputActionRemoved.Broadcast(InputActionItem);
-		InputActionItem.CrimAction = nullptr;
-	}
+	EnhancedInputComponent->RemoveBindingByHandle(InputActionItem.StartedHandle);
+	InputActionItem.StartedHandle = INDEX_NONE;
+	EnhancedInputComponent->RemoveBindingByHandle(InputActionItem.TriggeredHandle);
+	InputActionItem.TriggeredHandle = INDEX_NONE;
+	EnhancedInputComponent->RemoveBindingByHandle(InputActionItem.OngoingHandle);
+	InputActionItem.OngoingHandle = INDEX_NONE;
+	EnhancedInputComponent->RemoveBindingByHandle(InputActionItem.CanceledHandle);
+	InputActionItem.CanceledHandle = INDEX_NONE;
+	EnhancedInputComponent->RemoveBindingByHandle(InputActionItem.CompletedHandle);
+	InputActionItem.CompletedHandle = INDEX_NONE;
+	
+	OnInputActionRemoved.Broadcast(InputActionItem);
+	InputActionItem.CrimAction = nullptr;
 }
 

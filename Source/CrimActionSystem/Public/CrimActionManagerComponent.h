@@ -27,10 +27,10 @@ class CRIMACTIONSYSTEM_API UCrimActionManagerComponent : public UActorComponent
 public:
 	UCrimActionManagerComponent();
 	
-	/** When an InputAction has been bound to the EnhancedInputComponent. */
+	/** When an Action has been bound to an InputAction the EnhancedInputComponent. */
 	UPROPERTY(BlueprintAssignable)
-	FCrimActionManagerInputActionSignature OnInputActionAdded;
-	/** When an InputAction bindings has been removed from the EnhancedInputComponent. */
+	FCrimActionManagerInputActionSignature OnActionAdded;
+	/** When an Action's bindings has been removed from the EnhancedInputComponent. */
 	UPROPERTY(BlueprintAssignable)
 	FCrimActionManagerInputActionSignature OnInputActionRemoved;
 	

@@ -45,9 +45,7 @@ protected:
 	virtual void OnInitializeAction() {}
 	UFUNCTION(BlueprintImplementableEvent, DisplayName = "OnInitializeAction")
 	void K2_OnInitializeAction();
-	
-	void ResetAction();
-	
+
 	virtual void OnResetAction() {}
 	UFUNCTION(BlueprintImplementableEvent, DisplayName = "OnResetAction")
 	void K2_OnResetAction();
