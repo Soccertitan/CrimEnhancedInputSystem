@@ -26,7 +26,7 @@ public:
 	UFUNCTION(BlueprintPure, Category = "CrimAction")
 	UCrimActionManagerComponent* GetActionManagerComponent() const { return ActionManagerComponent; }
 	UFUNCTION(BlueprintPure, Category = "CrimAction")
-	FGameplayTag GetInputTag() const { return InputTag; }
+	FGameplayTagContainer GetInputTagContainer() const { return InputTagContainer; }
 
 	UFUNCTION(BlueprintCallable, Category = "CrimAction")
 	void InputActionTriggered(const FInputActionValue& Value);
@@ -41,14 +41,14 @@ public:
 
 protected:
 	void InitializeAction();
-
 	virtual void OnInitializeAction() {}
 	UFUNCTION(BlueprintImplementableEvent, DisplayName = "OnInitializeAction")
 	void K2_OnInitializeAction();
 
-	virtual void OnResetAction() {}
-	UFUNCTION(BlueprintImplementableEvent, DisplayName = "OnResetAction")
-	void K2_OnResetAction();
+	void DestroyAction();
+	virtual void OnDestroyAction() {}
+	UFUNCTION(BlueprintImplementableEvent, DisplayName = "OnDestroyAction")
+	void K2_OnDestroyAction();
 
 	UFUNCTION()
 	virtual void OnInputActionTriggered(const FInputActionValue& Value) {}
@@ -74,11 +74,21 @@ protected:
 	virtual void OnInputActionCompleted(const FInputActionValue& Value) {}
 	UFUNCTION(BlueprintImplementableEvent, DisplayName = "OnInputActionCompleted")
 	void K2_OnInputActionCompleted(const FInputActionValue& Value);
+	
+	void AddInputTag(const FGameplayTag& InputTag);
+	virtual void OnInputTagAdded(const FGameplayTag& InputTag) {}
+	UFUNCTION(BlueprintImplementableEvent, DisplayName = "OnInputTagAdded")
+	void K2_OnInputTagAdded(const FGameplayTag& InputTag);
+	
+	void RemoveInputTag(const FGameplayTag& InputTag);
+	virtual void OnInputTagRemoved(const FGameplayTag& InputTag) {}
+	UFUNCTION(BlueprintImplementableEvent, DisplayName = "OnInputTagRemoved")
+	void K2_OnInputTagRemoved(const FGameplayTag& InputTag);
 
 private:
 	/** Input Tag that can activate and identify the action. */
 	UPROPERTY()
-	FGameplayTag InputTag;
+	FGameplayTagContainer InputTagContainer;
 
 	/** Cached pointer to the PlayerController. */
 	UPROPERTY()

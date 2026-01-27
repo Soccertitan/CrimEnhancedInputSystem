@@ -134,12 +134,13 @@ void UCrimActionManagerComponent::Internal_AddBinding(FCrimInputActionItem& Inpu
 	if (bMakeNewAction)
 	{
 		UCrimAction* NewAction = NewObject<UCrimAction>(this, ActionClass);
-		NewAction->InputTag = InputActionItem.InputTag;
 		NewAction->PlayerController = PlayerController;
 		NewAction->ActionManagerComponent = this;
 		NewAction->InitializeAction();
 		InputActionItem.CrimAction = NewAction;
 	}
+	
+	InputActionItem.CrimAction->AddInputTag(InputActionItem.InputTag);
 	
 	//TODO: Figure out how to tell if the overriden functions are implements to avoid having to bind for each action when it's not necessary.
 	InputActionItem.TriggeredHandle = EnhancedInputComponent->BindAction(InputActionItem.InputAction, ETriggerEvent::Triggered, InputActionItem.CrimAction.Get(), &UCrimAction::InputActionTriggered).GetHandle();
@@ -163,8 +164,14 @@ void UCrimActionManagerComponent::Internal_RemoveBinding(FCrimInputActionItem& I
 	InputActionItem.CanceledHandle = INDEX_NONE;
 	EnhancedInputComponent->RemoveBindingByHandle(InputActionItem.CompletedHandle);
 	InputActionItem.CompletedHandle = INDEX_NONE;
-	
+
 	OnInputActionRemoved.Broadcast(InputActionItem);
-	InputActionItem.CrimAction = nullptr;
+	
+	InputActionItem.CrimAction->RemoveInputTag(InputActionItem.InputTag);
+	if (InputActionItem.CrimAction->GetInputTagContainer().IsEmpty())
+	{
+		InputActionItem.CrimAction->DestroyAction();
+		InputActionItem.CrimAction = nullptr;
+	}
 }
 

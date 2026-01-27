@@ -43,3 +43,23 @@ void UCrimAction::InitializeAction()
 	OnInitializeAction();
 	K2_OnInitializeAction();
 }
+
+void UCrimAction::DestroyAction()
+{
+	OnDestroyAction();
+	K2_OnDestroyAction();
+}
+
+void UCrimAction::AddInputTag(const FGameplayTag& InputTag)
+{
+	InputTagContainer.AddTag(InputTag);
+	OnInputTagAdded(InputTag);
+	K2_OnInputTagAdded(InputTag);
+}
+
+void UCrimAction::RemoveInputTag(const FGameplayTag& InputTag)
+{
+	InputTagContainer.RemoveTag(InputTag);
+	OnInputTagRemoved(InputTag);
+	K2_OnInputTagRemoved(InputTag);
+}
