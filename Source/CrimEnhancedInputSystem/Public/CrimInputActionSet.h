@@ -33,7 +33,7 @@ struct FCrimInputAction
  * Maps a GameplayTag to an InputAction. Also defines an InputMappingContext and priority to grant.
  */
 UCLASS()
-class CRIMACTIONSYSTEM_API UCrimInputActionSet : public UPrimaryDataAsset
+class CRIMENHANCEDINPUTSYSTEM_API UCrimInputActionSet : public UPrimaryDataAsset
 {
 	GENERATED_BODY()
 

@@ -10,7 +10,7 @@
  * An action that prints debug strings for the different Input Action triggers.
  */
 UCLASS()
-class CRIMACTIONSYSTEM_API UActionDebug : public UCrimAction
+class CRIMENHANCEDINPUTSYSTEM_API UActionDebug : public UCrimAction
 {
 	GENERATED_BODY()
 

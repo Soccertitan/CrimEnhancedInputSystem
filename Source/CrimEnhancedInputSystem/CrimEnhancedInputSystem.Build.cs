@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class CrimActionSystem : ModuleRules
+public class CrimEnhancedInputSystem : ModuleRules
 {
-	public CrimActionSystem(ReadOnlyTargetRules Target) : base(Target)
+	public CrimEnhancedInputSystem(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		

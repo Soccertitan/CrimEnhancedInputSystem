@@ -20,7 +20,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCrimActionManagerInputActionSignatu
  * through GAS or custom events need to be passed into an ability from client.
  */
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
-class CRIMACTIONSYSTEM_API UCrimActionManagerComponent : public UActorComponent
+class CRIMENHANCEDINPUTSYSTEM_API UCrimActionManagerComponent : public UActorComponent
 {
 	GENERATED_BODY()
 

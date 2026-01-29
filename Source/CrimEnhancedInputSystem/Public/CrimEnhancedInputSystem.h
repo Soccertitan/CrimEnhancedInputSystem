@@ -4,9 +4,9 @@
 
 #include "Modules/ModuleManager.h"
 
-CRIMACTIONSYSTEM_API DECLARE_LOG_CATEGORY_EXTERN(LogCrimActionSystem, Log, All);
+CRIMENHANCEDINPUTSYSTEM_API DECLARE_LOG_CATEGORY_EXTERN(LogCrimEnhancedInputSystem, Log, All);
 
-class FCrimActionSystemModule : public IModuleInterface
+class FCrimEnhancedInputSystemModule : public IModuleInterface
 {
 public:
 

@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class CRIMACTIONSYSTEM_API UActionRotateCamera : public UCrimAction
+class CRIMENHANCEDINPUTSYSTEM_API UActionRotateCamera : public UCrimAction
 {
 	GENERATED_BODY()
 	

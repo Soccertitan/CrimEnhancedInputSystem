@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class CRIMACTIONSYSTEM_API UActionMovePawn : public UCrimAction
+class CRIMENHANCEDINPUTSYSTEM_API UActionMovePawn : public UCrimAction
 {
 	GENERATED_BODY()
 	

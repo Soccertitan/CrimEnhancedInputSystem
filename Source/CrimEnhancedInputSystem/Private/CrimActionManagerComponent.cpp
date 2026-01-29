@@ -4,7 +4,7 @@
 #include "CrimActionManagerComponent.h"
 
 #include "CrimAction.h"
-#include "CrimActionSystem.h"
+#include "CrimEnhancedInputSystem.h"
 #include "CrimInputActionSet.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
@@ -36,7 +36,7 @@ void UCrimActionManagerComponent::InitActionManagerComponent()
 	PlayerController = Cast<APlayerController>(GetOwner());
 	if (!PlayerController)
 	{
-		UE_LOG(LogCrimActionSystem, Error, TEXT("[%s] expects to be added only to a PlayerController. Deactivating component"), *GetNameSafe(this));
+		UE_LOG(LogCrimEnhancedInputSystem, Error, TEXT("[%s] expects to be added only to a PlayerController. Deactivating component"), *GetNameSafe(this));
 		Deactivate();
 		return;
 	}

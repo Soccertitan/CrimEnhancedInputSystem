@@ -14,7 +14,7 @@ class UCrimActionManagerComponent;
  * An action that can be performed taking in input.
  */
 UCLASS(Abstract, BlueprintType, Blueprintable)
-class CRIMACTIONSYSTEM_API UCrimAction : public UObject
+class CRIMENHANCEDINPUTSYSTEM_API UCrimAction : public UObject
 {
 	GENERATED_BODY()
 	
