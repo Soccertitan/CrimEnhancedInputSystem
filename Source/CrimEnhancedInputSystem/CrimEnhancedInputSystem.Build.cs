@@ -26,8 +26,7 @@ public class CrimEnhancedInputSystem : ModuleRules
 				"Core", 
 				"GameplayTags",
 				"EnhancedInput",
-				"UMG", 
-				"ModelViewViewModel",
+				"UMG",
 			}
 			);
 			

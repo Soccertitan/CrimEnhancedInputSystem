@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "CrimAction.h"
-#include "ActionDebug.generated.h"
+#include "InputActionListener.h"
+#include "DebugInputActionListener.generated.h"
 
 /**
  * An action that prints debug strings for the different Input Action triggers.
  */
 UCLASS()
-class CRIMENHANCEDINPUTSYSTEM_API UActionDebug : public UCrimAction
+class CRIMENHANCEDINPUTSYSTEM_API UDebugInputActionListener : public UInputActionListener
 {
 	GENERATED_BODY()
 
