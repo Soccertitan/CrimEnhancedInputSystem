@@ -43,6 +43,16 @@ void UInputActionListener::InputActionCompleted(const FInputActionValue& Value)
 void UInputActionListener::InitializeListener()
 {
 	EnhancedInputComponent = Cast<UCrimEnhancedInputComponent>(GetOuter());
+	ensure(EnhancedInputComponent);
+	PlayerController = Cast<APlayerController>(EnhancedInputComponent->GetOwner());
+	if (!PlayerController)
+	{
+		if (APawn* Pawn = Cast<APawn>(EnhancedInputComponent->GetOwner()))
+		{
+			PlayerController = Cast<APlayerController>(Pawn->GetController());		
+		}
+	}
+	ensure(PlayerController);
 	OnInitializeListener();
 	K2_OnInitializeListener();
 }

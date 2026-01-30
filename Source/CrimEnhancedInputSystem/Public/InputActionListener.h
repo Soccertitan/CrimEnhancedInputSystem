@@ -21,6 +21,8 @@ public:
 	UInputActionListener();
 
 	UFUNCTION(BlueprintPure, Category = "InputActionListener")
+	APlayerController* GetPlayerController() const { return PlayerController; }
+	UFUNCTION(BlueprintPure, Category = "InputActionListener")
 	UCrimEnhancedInputComponent* GetEnhancedInputManagerComponent() const { return EnhancedInputComponent; }
 
 	UFUNCTION(BlueprintCallable, Category = "InputActionListener")
@@ -66,6 +68,8 @@ protected:
 	void K2_OnInputActionCompleted(const FInputActionValue& Value);
 
 private:
+	UPROPERTY()
+	TObjectPtr<APlayerController> PlayerController;
 	/** Cached pointer to the CrimEnhancedInputComponent that constructed the listener. */
 	UPROPERTY()
 	TObjectPtr<UCrimEnhancedInputComponent> EnhancedInputComponent;
