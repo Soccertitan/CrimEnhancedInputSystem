@@ -107,6 +107,17 @@ void UCrimEnhancedInputComponent::ClearBindingsForObject(UObject* InOwner)
 	{
 		ClearListeners();
 	}
+	else if (InOwner && InOwner->IsA(UInputActionListener::StaticClass()))
+	{
+		for (FCrimEnhancedInputActionBinding& Item : CrimEnhancedInputActionBindings)
+		{
+			if (Item.Listener == InOwner)
+			{
+				Internal_RemoveListener(Item);
+				continue;
+			}
+		}
+	}
 }
 
 void UCrimEnhancedInputComponent::Internal_AddListener(const FCrimEnhancedInputActionBinding& Binding)
