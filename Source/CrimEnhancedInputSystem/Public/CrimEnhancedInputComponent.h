@@ -43,7 +43,7 @@ public:
 	 * @param ListenerClass The class to construct as the listener bound to the InputAction.
 	 */
 	UFUNCTION(BlueprintCallable, Category = "CrimEnhancedInputComponent")
-	void SetListener(UInputAction* InputAction, const TSubclassOf<UInputActionListener>& ListenerClass = nullptr);
+	FCrimEnhancedInputActionBinding SetListener(UInputAction* InputAction, const TSubclassOf<UInputActionListener>& ListenerClass = nullptr);
 	
 	UFUNCTION(BlueprintCallable, Category = "CrimEnhancedInputComponent")
 	void ClearListeners();

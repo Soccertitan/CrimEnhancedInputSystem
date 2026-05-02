@@ -35,7 +35,7 @@ FCrimEnhancedInputActionBinding UCrimEnhancedInputComponent::CreateActionBinding
 	return Result;
 }
 
-void UCrimEnhancedInputComponent::SetListener(UInputAction* InputAction, const TSubclassOf<UInputActionListener>& ListenerClass)
+FCrimEnhancedInputActionBinding UCrimEnhancedInputComponent::SetListener(UInputAction* InputAction, const TSubclassOf<UInputActionListener>& ListenerClass)
 {
 	if (InputAction)
 	{
@@ -49,7 +49,9 @@ void UCrimEnhancedInputComponent::SetListener(UInputAction* InputAction, const T
 		{
 			Internal_AddListener(Result);
 		}
+		return Result;
 	}
+	return FCrimEnhancedInputActionBinding();
 }
 
 void UCrimEnhancedInputComponent::ClearListeners()
