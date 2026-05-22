@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "InputActionListener.h"
-#include "MovePawnInputActionListener.generated.h"
+#include "InputActionListener_MovePawn.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class CRIMENHANCEDINPUTSYSTEM_API UMovePawnInputActionListener : public UInputActionListener
+class CRIMENHANCEDINPUTSYSTEM_API UInputActionListener_MovePawn : public UInputActionListener
 {
 	GENERATED_BODY()
 	

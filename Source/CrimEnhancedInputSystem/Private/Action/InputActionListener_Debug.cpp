@@ -1,12 +1,12 @@
 ﻿// Copyright Soccertitan 2025
 
 
-#include "Action/DebugInputActionListener.h"
+#include "Action/InputActionListener_Debug.h"
 
 #include "InputActionValue.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-void UDebugInputActionListener::OnInputActionStarted(const FInputActionValue& Value)
+void UInputActionListener_Debug::OnInputActionStarted(const FInputActionValue& Value)
 {
 	Super::OnInputActionStarted(Value);
 	if (bPrintActionStarted)
@@ -16,7 +16,7 @@ void UDebugInputActionListener::OnInputActionStarted(const FInputActionValue& Va
 	}
 }
 
-void UDebugInputActionListener::OnInputActionTriggered(const FInputActionValue& Value)
+void UInputActionListener_Debug::OnInputActionTriggered(const FInputActionValue& Value)
 {
 	Super::OnInputActionTriggered(Value);
 	if (bPrintActionTriggered)
@@ -26,7 +26,7 @@ void UDebugInputActionListener::OnInputActionTriggered(const FInputActionValue& 
 	}
 }
 
-void UDebugInputActionListener::OnInputActionOngoing(const FInputActionValue& Value)
+void UInputActionListener_Debug::OnInputActionOngoing(const FInputActionValue& Value)
 {
 	Super::OnInputActionOngoing(Value);
 	if (bPrintActionOngoing)
@@ -36,7 +36,7 @@ void UDebugInputActionListener::OnInputActionOngoing(const FInputActionValue& Va
 	}
 }
 
-void UDebugInputActionListener::OnInputActionCanceled(const FInputActionValue& Value)
+void UInputActionListener_Debug::OnInputActionCanceled(const FInputActionValue& Value)
 {
 	Super::OnInputActionCanceled(Value);
 	if (bPrintActionCanceled)
@@ -46,7 +46,7 @@ void UDebugInputActionListener::OnInputActionCanceled(const FInputActionValue& V
 	}
 }
 
-void UDebugInputActionListener::OnInputActionCompleted(const FInputActionValue& Value)
+void UInputActionListener_Debug::OnInputActionCompleted(const FInputActionValue& Value)
 {
 	Super::OnInputActionCompleted(Value);
 	if (bPrintActionCompleted)

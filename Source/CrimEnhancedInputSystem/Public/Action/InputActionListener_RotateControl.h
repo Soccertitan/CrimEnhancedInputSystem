@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "InputActionListener.h"
-#include "RotateCameraInputActionListener.generated.h"
+#include "InputActionListener_RotateControl.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class CRIMENHANCEDINPUTSYSTEM_API URotateCameraInputActionListener : public UInputActionListener
+class CRIMENHANCEDINPUTSYSTEM_API UInputActionListener_RotateControl : public UInputActionListener
 {
 	GENERATED_BODY()
 	
@@ -21,5 +21,5 @@ protected:
 	
 private:
 	UPROPERTY()
-	TObjectPtr<AController> Controller;
+	TObjectPtr<APlayerController> PlayerController;
 };

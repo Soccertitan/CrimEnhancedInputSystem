@@ -1,13 +1,13 @@
 ﻿// Copyright Soccertitan 2025
 
 
-#include "Action/MovePawnInputActionListener.h"
+#include "Action/InputActionListener_MovePawn.h"
 
 #include "CrimEnhancedInputComponent.h"
 #include "InputActionValue.h"
 #include "Kismet/KismetMathLibrary.h"
 
-void UMovePawnInputActionListener::OnInitializeListener()
+void UInputActionListener_MovePawn::OnInitializeListener()
 {
 	Super::OnInitializeListener();
 	
@@ -23,7 +23,7 @@ void UMovePawnInputActionListener::OnInitializeListener()
 	}
 }
 
-void UMovePawnInputActionListener::OnInputActionTriggered(const FInputActionValue& Value)
+void UInputActionListener_MovePawn::OnInputActionTriggered(const FInputActionValue& Value)
 {
 	if (Controller)
 	{

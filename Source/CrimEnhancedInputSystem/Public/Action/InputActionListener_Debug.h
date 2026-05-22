@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "InputActionListener.h"
-#include "DebugInputActionListener.generated.h"
+#include "InputActionListener_Debug.generated.h"
 
 /**
  * An action that prints debug strings for the different Input Action triggers.
  */
 UCLASS()
-class CRIMENHANCEDINPUTSYSTEM_API UDebugInputActionListener : public UInputActionListener
+class CRIMENHANCEDINPUTSYSTEM_API UInputActionListener_Debug : public UInputActionListener
 {
 	GENERATED_BODY()
 
