@@ -15,11 +15,5 @@ class CRIMENHANCEDINPUTSYSTEM_API UInputActionListener_RotateControl : public UI
 	GENERATED_BODY()
 	
 protected:
-	virtual void OnInitializeListener() override;
-	
 	virtual void OnInputActionTriggered(const FInputActionValue& Value) override;
-	
-private:
-	UPROPERTY()
-	TObjectPtr<APlayerController> PlayerController;
 };
