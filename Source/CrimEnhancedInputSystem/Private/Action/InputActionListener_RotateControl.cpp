@@ -10,8 +10,8 @@ void UInputActionListener_RotateControl::OnInputActionTriggered(const FInputActi
 {
 	if (GetPlayerController())
 	{
+		GetPlayerController()->AddYawInput(Value[0]);
 		GetPlayerController()->AddPitchInput(Value[1]);
-		GetPlayerController()->AddYawInput(Value[2]);
-		GetPlayerController()->AddRollInput(Value[3]);
+		GetPlayerController()->AddRollInput(Value[2]);
 	}
 }
