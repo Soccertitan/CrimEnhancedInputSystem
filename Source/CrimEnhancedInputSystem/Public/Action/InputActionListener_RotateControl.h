@@ -14,6 +14,6 @@ class CRIMENHANCEDINPUTSYSTEM_API UInputActionListener_RotateControl : public UI
 {
 	GENERATED_BODY()
 	
-protected:
-	virtual void OnInputActionTriggered(const FInputActionValue& Value) override;
+public:
+	virtual void InputActionTriggered(const FInputActionValue& Value) override;
 };

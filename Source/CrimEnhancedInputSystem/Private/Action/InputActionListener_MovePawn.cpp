@@ -7,27 +7,12 @@
 #include "InputActionValue.h"
 #include "Kismet/KismetMathLibrary.h"
 
-void UInputActionListener_MovePawn::OnInitializeListener()
-{
-	Super::OnInitializeListener();
-	
-	Controller = Cast<AController>(GetEnhancedInputManagerComponent()->GetOwner());
-	if (Controller)
-	{
-		return;
-	}
-	
-	if (const APawn* Pawn = Cast<APawn>(GetEnhancedInputManagerComponent()->GetOwner()))
-	{
-		Controller = Pawn->GetController();
-	}
-}
 
-void UInputActionListener_MovePawn::OnInputActionTriggered(const FInputActionValue& Value)
+void UInputActionListener_MovePawn::InputActionTriggered(const FInputActionValue& Value)
 {
-	if (Controller)
+	if (GetPlayerController())
 	{
-		if(APawn* ControlledPawn = Controller->GetPawn())
+		if(APawn* ControlledPawn = GetPlayerController()->GetPawn())
 		{
 			const FRotator Rotation = ControlledPawn->GetControlRotation();
 			const FVector ForwardVector = UKismetMathLibrary::GetForwardVector(FRotator(0,Rotation.Yaw,0));

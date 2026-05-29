@@ -63,6 +63,6 @@ private:
 	UPROPERTY()
 	TArray<FCrimEnhancedInputActionBinding> CrimEnhancedInputActionBindings;
 	
-	void Internal_AddListener(const FCrimEnhancedInputActionBinding& Binding);
-	void Internal_RemoveListener(FCrimEnhancedInputActionBinding& Binding);
+	void AddListenerInternal(const FCrimEnhancedInputActionBinding& Binding);
+	void RemoveListenerInternal(FCrimEnhancedInputActionBinding& Binding);
 };

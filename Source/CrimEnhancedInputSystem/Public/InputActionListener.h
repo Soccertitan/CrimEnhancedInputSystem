@@ -26,46 +26,37 @@ public:
 	UCrimEnhancedInputComponent* GetEnhancedInputManagerComponent() const { return EnhancedInputComponent; }
 
 	UFUNCTION(BlueprintCallable, Category = "InputActionListener")
-	void InputActionTriggered(const FInputActionValue& Value);
+	virtual void InputActionTriggered(const FInputActionValue& Value);
 	UFUNCTION(BlueprintCallable, Category = "InputActionListener")
-	void InputActionStarted(const FInputActionValue& Value);
+	virtual void InputActionStarted(const FInputActionValue& Value);
 	UFUNCTION(BlueprintCallable, Category = "InputActionListener")
-	void InputActionOngoing(const FInputActionValue& Value);
+	virtual void InputActionOngoing(const FInputActionValue& Value);
 	UFUNCTION(BlueprintCallable, Category = "InputActionListener")
-	void InputActionCanceled(const FInputActionValue& Value);
+	virtual void InputActionCanceled(const FInputActionValue& Value);
 	UFUNCTION(BlueprintCallable, Category = "InputActionListener")
-	void InputActionCompleted(const FInputActionValue& Value);
+	virtual void InputActionCompleted(const FInputActionValue& Value);
 
 protected:
-	void InitializeListener();
-	virtual void OnInitializeListener() {}
-	UFUNCTION(BlueprintImplementableEvent, DisplayName = "OnInitializeListener")
-	void K2_OnInitializeListener();
-
-	UFUNCTION()
-	virtual void OnInputActionTriggered(const FInputActionValue& Value) {}
-	UFUNCTION(BlueprintImplementableEvent, DisplayName = "OnInputActionTriggered")
-	void K2_OnInputActionTriggered(const FInputActionValue& Value);
+	/** Called by the CrimEnhancedInputComponent when setting up an InputActionListener for the first time. */
+	virtual void Initialize();
 	
-	UFUNCTION()
-	virtual void OnInputActionStarted(const FInputActionValue& Value) {}
-	UFUNCTION(BlueprintImplementableEvent, DisplayName = "OnInputActionStarted")
-	void K2_OnInputActionStarted(const FInputActionValue& Value);
+	UFUNCTION(BlueprintImplementableEvent, DisplayName = "Initialize")
+	void K2_Initialize();
 	
-	UFUNCTION()
-	virtual void OnInputActionOngoing(const FInputActionValue& Value) {}
-	UFUNCTION(BlueprintImplementableEvent, DisplayName = "OnInputActionOngoing")
-	void K2_OnInputActionOngoing(const FInputActionValue& Value);
+	UFUNCTION(BlueprintImplementableEvent, DisplayName = "InputActionTriggered")
+	void K2_InputActionTriggered(const FInputActionValue& Value);
 	
-	UFUNCTION()
-	virtual void OnInputActionCanceled(const FInputActionValue& Value) {}
-	UFUNCTION(BlueprintImplementableEvent, DisplayName = "OnInputActionCanceled")
-	void K2_OnInputActionCanceled(const FInputActionValue& Value);
+	UFUNCTION(BlueprintImplementableEvent, DisplayName = "InputActionStarted")
+	void K2_InputActionStarted(const FInputActionValue& Value);
 	
-	UFUNCTION()
-	virtual void OnInputActionCompleted(const FInputActionValue& Value) {}
-	UFUNCTION(BlueprintImplementableEvent, DisplayName = "OnInputActionCompleted")
-	void K2_OnInputActionCompleted(const FInputActionValue& Value);
+	UFUNCTION(BlueprintImplementableEvent, DisplayName = "InputActionOngoing")
+	void K2_InputActionOngoing(const FInputActionValue& Value);
+	
+	UFUNCTION(BlueprintImplementableEvent, DisplayName = "InputActionCanceled")
+	void K2_InputActionCanceled(const FInputActionValue& Value);
+	
+	UFUNCTION(BlueprintImplementableEvent, DisplayName = "InputActionCompleted")
+	void K2_InputActionCompleted(const FInputActionValue& Value);
 
 private:
 	UPROPERTY()

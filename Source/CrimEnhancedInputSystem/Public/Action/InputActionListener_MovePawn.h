@@ -15,13 +15,5 @@ class CRIMENHANCEDINPUTSYSTEM_API UInputActionListener_MovePawn : public UInputA
 	GENERATED_BODY()
 	
 public:
-	
-protected:
-	virtual void OnInitializeListener() override;
-	
-	virtual void OnInputActionTriggered(const FInputActionValue& Value) override;
-	
-private:
-	UPROPERTY()
-	TObjectPtr<AController> Controller;
+	virtual void InputActionTriggered(const FInputActionValue& Value) override;
 };

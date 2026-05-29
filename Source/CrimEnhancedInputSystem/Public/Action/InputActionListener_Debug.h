@@ -14,6 +14,13 @@ class CRIMENHANCEDINPUTSYSTEM_API UInputActionListener_Debug : public UInputActi
 {
 	GENERATED_BODY()
 
+public:
+	virtual void InputActionStarted(const FInputActionValue& Value) override;
+	virtual void InputActionTriggered(const FInputActionValue& Value) override;
+	virtual void InputActionOngoing(const FInputActionValue& Value) override;
+	virtual void InputActionCanceled(const FInputActionValue& Value) override;
+	virtual void InputActionCompleted(const FInputActionValue& Value) override;
+	
 protected:
 	UPROPERTY(EditAnywhere)
 	bool bPrintToScreen = true;
@@ -34,10 +41,4 @@ protected:
 	bool bPrintActionCanceled = true;
 	UPROPERTY(EditAnywhere)
 	bool bPrintActionCompleted = true;
-	
-	virtual void OnInputActionStarted(const FInputActionValue& Value) override;
-	virtual void OnInputActionTriggered(const FInputActionValue& Value) override;
-	virtual void OnInputActionOngoing(const FInputActionValue& Value) override;
-	virtual void OnInputActionCanceled(const FInputActionValue& Value) override;
-	virtual void OnInputActionCompleted(const FInputActionValue& Value) override;
 };

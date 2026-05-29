@@ -20,7 +20,7 @@ FCrimEnhancedInputActionBinding UCrimEnhancedInputComponent::CreateActionBinding
 	{
 		UInputActionListener* NewListener = NewObject<UInputActionListener>(this, ListenerClass);
 		NewListener->EnhancedInputComponent = this;
-		NewListener->InitializeListener();
+		NewListener->Initialize();
 		Result.InputAction = InputAction;
 		Result.Listener = NewListener;
 
@@ -41,13 +41,13 @@ FCrimEnhancedInputActionBinding UCrimEnhancedInputComponent::SetListener(UInputA
 	{
 		if (FCrimEnhancedInputActionBinding* CurrentBinding = CrimEnhancedInputActionBindings.FindByKey(InputAction))
 		{
-			Internal_RemoveListener(*CurrentBinding);
+			RemoveListenerInternal(*CurrentBinding);
 		}
 
 		const FCrimEnhancedInputActionBinding Result = CreateActionBinding(InputAction, ListenerClass);
 		if (Result.IsValid())
 		{
-			Internal_AddListener(Result);
+			AddListenerInternal(Result);
 		}
 		return Result;
 	}
@@ -115,20 +115,20 @@ void UCrimEnhancedInputComponent::ClearBindingsForObject(UObject* InOwner)
 		{
 			if (Item.Listener == InOwner)
 			{
-				Internal_RemoveListener(Item);
+				RemoveListenerInternal(Item);
 				continue;
 			}
 		}
 	}
 }
 
-void UCrimEnhancedInputComponent::Internal_AddListener(const FCrimEnhancedInputActionBinding& Binding)
+void UCrimEnhancedInputComponent::AddListenerInternal(const FCrimEnhancedInputActionBinding& Binding)
 {
 	CrimEnhancedInputActionBindings.Add(Binding);
 	OnListenerAdded.Broadcast(Binding);
 }
 
-void UCrimEnhancedInputComponent::Internal_RemoveListener(FCrimEnhancedInputActionBinding& Binding)
+void UCrimEnhancedInputComponent::RemoveListenerInternal(FCrimEnhancedInputActionBinding& Binding)
 {
 	RemoveBindingByHandle(Binding.StartedHandle);
 	Binding.StartedHandle = INDEX_NONE;

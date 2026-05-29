@@ -6,9 +6,9 @@
 #include "InputActionValue.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-void UInputActionListener_Debug::OnInputActionStarted(const FInputActionValue& Value)
+void UInputActionListener_Debug::InputActionStarted(const FInputActionValue& Value)
 {
-	Super::OnInputActionStarted(Value);
+	Super::InputActionStarted(Value);
 	if (bPrintActionStarted)
 	{
 		const FString Message = FString::Printf(TEXT("[%s] - Action Started: Value [%s]"), *GetName(), *Value.ToString());
@@ -16,9 +16,9 @@ void UInputActionListener_Debug::OnInputActionStarted(const FInputActionValue& V
 	}
 }
 
-void UInputActionListener_Debug::OnInputActionTriggered(const FInputActionValue& Value)
+void UInputActionListener_Debug::InputActionTriggered(const FInputActionValue& Value)
 {
-	Super::OnInputActionTriggered(Value);
+	Super::InputActionTriggered(Value);
 	if (bPrintActionTriggered)
 	{
 		const FString Message = FString::Printf(TEXT("[%s] - Action Triggered: Value [%s]"), *GetName(), *Value.ToString());
@@ -26,9 +26,9 @@ void UInputActionListener_Debug::OnInputActionTriggered(const FInputActionValue&
 	}
 }
 
-void UInputActionListener_Debug::OnInputActionOngoing(const FInputActionValue& Value)
+void UInputActionListener_Debug::InputActionOngoing(const FInputActionValue& Value)
 {
-	Super::OnInputActionOngoing(Value);
+	Super::InputActionOngoing(Value);
 	if (bPrintActionOngoing)
 	{
 		const FString Message = FString::Printf(TEXT("[%s] - Action Ongoing: Value [%s]"), *GetName(), *Value.ToString());
@@ -36,9 +36,9 @@ void UInputActionListener_Debug::OnInputActionOngoing(const FInputActionValue& V
 	}
 }
 
-void UInputActionListener_Debug::OnInputActionCanceled(const FInputActionValue& Value)
+void UInputActionListener_Debug::InputActionCanceled(const FInputActionValue& Value)
 {
-	Super::OnInputActionCanceled(Value);
+	Super::InputActionCanceled(Value);
 	if (bPrintActionCanceled)
 	{
 		const FString Message = FString::Printf(TEXT("[%s] - Action Canceled: Value [%s]"), *GetName(), *Value.ToString());
@@ -46,9 +46,9 @@ void UInputActionListener_Debug::OnInputActionCanceled(const FInputActionValue& 
 	}
 }
 
-void UInputActionListener_Debug::OnInputActionCompleted(const FInputActionValue& Value)
+void UInputActionListener_Debug::InputActionCompleted(const FInputActionValue& Value)
 {
-	Super::OnInputActionCompleted(Value);
+	Super::InputActionCompleted(Value);
 	if (bPrintActionCompleted)
 	{
 		const FString Message = FString::Printf(TEXT("[%s] - Action Completed: Value [%s]"), *GetName(), *Value.ToString());

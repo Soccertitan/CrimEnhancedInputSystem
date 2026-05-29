@@ -6,7 +6,7 @@
 #include "InputActionValue.h"
 
 
-void UInputActionListener_RotateControl::OnInputActionTriggered(const FInputActionValue& Value)
+void UInputActionListener_RotateControl::InputActionTriggered(const FInputActionValue& Value)
 {
 	if (GetPlayerController())
 	{

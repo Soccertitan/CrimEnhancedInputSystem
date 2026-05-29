@@ -12,35 +12,30 @@ UInputActionListener::UInputActionListener()
 
 void UInputActionListener::InputActionTriggered(const FInputActionValue& Value)
 {
-	OnInputActionTriggered(Value);
-	K2_OnInputActionTriggered(Value);
+	K2_InputActionTriggered(Value);
 }
 
 void UInputActionListener::InputActionStarted(const FInputActionValue& Value)
 {
-	OnInputActionStarted(Value);
-	K2_OnInputActionStarted(Value);
+	K2_InputActionStarted(Value);
 }
 
 void UInputActionListener::InputActionOngoing(const FInputActionValue& Value)
 {
-	OnInputActionOngoing(Value);
-	K2_OnInputActionOngoing(Value);
+	K2_InputActionOngoing(Value);
 }
 
 void UInputActionListener::InputActionCanceled(const FInputActionValue& Value)
 {
-	OnInputActionCanceled(Value);
-	K2_OnInputActionCanceled(Value);
+	K2_InputActionCanceled(Value);
 }
 
 void UInputActionListener::InputActionCompleted(const FInputActionValue& Value)
 {
-	OnInputActionCompleted(Value);
-	K2_OnInputActionCompleted(Value);
+	K2_InputActionCompleted(Value);
 }
 
-void UInputActionListener::InitializeListener()
+void UInputActionListener::Initialize()
 {
 	EnhancedInputComponent = Cast<UCrimEnhancedInputComponent>(GetOuter());
 	ensure(EnhancedInputComponent);
@@ -53,6 +48,6 @@ void UInputActionListener::InitializeListener()
 		}
 	}
 	ensure(PlayerController);
-	OnInitializeListener();
-	K2_OnInitializeListener();
+
+	K2_Initialize();
 }
